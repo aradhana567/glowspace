@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Glowspace</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd);
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+    }
+
+    /* INTRO */
+    .intro {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      line-height: 1.6;
+    }
+
+    /* PRODUCTS */
+    .products {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .product-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 220px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .form-box {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      width: 300px;
+      margin: auto;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    input, textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #6C63FF;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #4e47d6;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Hi, I'm Aradhana</h1>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  I'm Aradhana, a designer and frontend developer specializing in crafting interfaces that feel as good as they look. 
+  I believe digital experiences should be intuitive, unobtrusive, and visually calming. 
+
+  With a strong focus on frontend development and visual design, I seamlessly bridge aesthetics and performance to create thoughtful, memorable user journeys.
+</div>
+
+<!-- PRODUCTS -->
+<div class="products">
+  <h2>My Products</h2>
+
+  <div class="product-container">
+
+    <div class="card">
+      <img src="images/product1.webp">
+      <h3>Product 1</h3>
+      <p>Rs. 299</p>
+    </div>
+
+    <div class="card">
+      <img src="images/product2.webp">
+      <h3>Product 2</h3>
+      <p>Rs. 499</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact">
+  <h2>Let's Connect</h2>
+
+  <form action="save.php" method="POST" class="form-box">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+</body>
+</html>
