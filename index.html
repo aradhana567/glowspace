@@ -6,72 +6,56 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial;
       background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
       text-align: center;
     }
 
-    h1 {
-      margin-top: 30px;
-      font-size: 40px;
-      color: #333;
-    }
-
     .intro {
-      max-width: 600px;
-      margin: 20px auto;
+      margin: 20px;
       padding: 20px;
-      background: rgba(255,255,255,0.85);
-      border-radius: 15px;
-      line-height: 1.6;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      background: white;
+      border-radius: 10px;
     }
 
     .products {
       display: flex;
       justify-content: center;
       gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 30px;
+      margin: 20px;
     }
 
     .card {
       background: white;
-      padding: 15px;
-      border-radius: 15px;
-      width: 220px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      padding: 10px;
+      border-radius: 10px;
     }
 
-    .card img {
-      width: 100%;
+    img {
+      width: 200px;
       border-radius: 10px;
     }
 
     .form-box {
+      margin: 30px auto;
+      width: 300px;
       background: white;
       padding: 20px;
-      width: 300px;
-      margin: 40px auto;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      border-radius: 10px;
     }
 
     input, textarea {
       width: 90%;
+      margin: 10px;
       padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
     }
 
     button {
       padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #6C63FF;
+      background: purple;
       color: white;
-      cursor: pointer;
+      border: none;
+      border-radius: 5px;
     }
 
     .message-box {
@@ -90,11 +74,7 @@
 
 <div class="intro">
 I’m Aradhana, a designer and frontend developer specializing in crafting interfaces that feel as good as they look. I believe digital experiences should be intuitive, unobtrusive, and visually calming.
-
-With a strong focus on frontend development and visual design, I seamlessly bridge aesthetics and performance to create thoughtful, memorable user journeys.
 </div>
-
-<h2>Products</h2>
 
 <div class="products">
   <div class="card">
@@ -109,8 +89,8 @@ With a strong focus on frontend development and visual design, I seamlessly brid
 </div>
 
 <div class="form-box">
-  <!-- FINAL FIXED FORM -->
-  <form onsubmit="saveData(event); return false;">
+  <!-- IMPORTANT: NO action attribute -->
+  <form onsubmit="saveData(event)">
     <input type="text" id="name" placeholder="Your Name" required>
     <input type="email" id="email" placeholder="Your Email" required>
     <textarea id="message" placeholder="Your Message" required></textarea>
@@ -124,7 +104,7 @@ With a strong focus on frontend development and visual design, I seamlessly brid
 
 <script>
 function saveData(event) {
-  event.preventDefault();
+  event.preventDefault(); // stops refresh
 
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
@@ -132,38 +112,35 @@ function saveData(event) {
 
   let data = JSON.parse(localStorage.getItem("messages")) || [];
 
-  data.push({name, email, message});
+  data.push({ name, email, message });
 
   localStorage.setItem("messages", JSON.stringify(data));
 
   alert("Saved successfully!");
 
-  document.querySelector("form").reset();
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("message").value = "";
 }
 
 function viewData() {
   let data = JSON.parse(localStorage.getItem("messages")) || [];
 
-  let outputDiv = document.getElementById("output");
-
-  if (data.length === 0) {
-    outputDiv.innerHTML = "<p>No messages yet</p>";
-    return;
-  }
-
   let output = "";
 
-  data.forEach(item => {
-    output += 
-      <div class="message-box">
-        <h3>${item.name}</h3>
-        <p>${item.email}</p>
-        <p>${item.message}</p>
-      </div>
-    ;
-  });
+  if (data.length === 0) {
+    output = "<p>No messages yet</p>";
+  } else {
+    data.forEach(item => {
+      output += "<div class='message-box'>" +
+        "<h3>" + item.name + "</h3>" +
+        "<p>" + item.email + "</p>" +
+        "<p>" + item.message + "</p>" +
+      "</div>";
+    });
+  }
 
-  outputDiv.innerHTML = output;
+  document.getElementById("output").innerHTML = output;
 }
 </script>
 
