@@ -104,7 +104,6 @@ With a strong focus on frontend development and visual design, I seamlessly brid
 <h2>Products</h2>
 
 <div class="products">
-
   <div class="card">
     <img src="images/product1.webp">
     <p>Product 1</p>
@@ -114,10 +113,10 @@ With a strong focus on frontend development and visual design, I seamlessly brid
     <img src="images/product2.webp">
     <p>Product 2</p>
   </div>
-
 </div>
 
 <div class="form-box">
+  <!-- ✅ IMPORTANT FIX (NO save.php) -->
   <form onsubmit="saveData(event)">
     <input type="text" id="name" placeholder="Your Name" required>
     <input type="email" id="email" placeholder="Your Email" required>
@@ -128,6 +127,7 @@ With a strong focus on frontend development and visual design, I seamlessly brid
 
 <button onclick="viewData()">View Messages</button>
 
+<!-- ✅ OUTPUT HERE -->
 <div id="output"></div>
 
 <script>
@@ -144,7 +144,8 @@ function saveData(event) {
 
   localStorage.setItem("messages", JSON.stringify(data));
 
-  alert("Saved!");
+  alert("Saved successfully!");
+
   document.querySelector("form").reset();
 }
 
