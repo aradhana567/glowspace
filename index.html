@@ -6,73 +6,61 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd);
-    }
-
-    h1, h2 {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
       text-align: center;
     }
 
-    /* HERO */
-    .hero {
-      text-align: center;
-      padding: 80px 20px;
-    }
-
-    .hero h1 {
+    h1 {
+      margin-top: 30px;
       font-size: 40px;
+      color: #333;
     }
 
-    /* INTRO */
     .intro {
       max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 25px;
+      margin: 20px auto;
+      padding: 20px;
+      background: rgba(255,255,255,0.8);
       border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      font-size: 16px;
       line-height: 1.6;
+      color: #444;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
 
-    /* PRODUCTS */
     .products {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    .product-container {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 20px;
       flex-wrap: wrap;
+      margin-top: 30px;
     }
 
     .card {
       background: white;
-      padding: 20px;
+      padding: 15px;
       border-radius: 15px;
       width: 220px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: 0.3s;
     }
 
-    .card img {
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    img {
       width: 100%;
       border-radius: 10px;
     }
 
-    /* CONTACT */
-    .contact {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
     .form-box {
       background: white;
-      padding: 25px;
-      border-radius: 15px;
+      padding: 20px;
       width: 300px;
-      margin: auto;
+      margin: 40px auto;
+      border-radius: 15px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
 
@@ -93,60 +81,91 @@
       cursor: pointer;
     }
 
-    button:hover {
-      background: #4e47d6;
+    .message-box {
+      background: white;
+      margin: 10px auto;
+      padding: 10px;
+      width: 300px;
+      border-radius: 10px;
     }
   </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-  <h1>Hi, I'm Aradhana</h1>
-</div>
+<h1>Glowspace</h1>
 
-<!-- INTRO -->
 <div class="intro">
-  I'm Aradhana, a designer and frontend developer specializing in crafting interfaces that feel as good as they look. 
-  I believe digital experiences should be intuitive, unobtrusive, and visually calming. 
+I’m Aradhana, a designer and frontend developer specializing in crafting interfaces that feel as good as they look. I believe digital experiences should be intuitive, unobtrusive, and visually calming.
 
-  With a strong focus on frontend development and visual design, I seamlessly bridge aesthetics and performance to create thoughtful, memorable user journeys.
+With a strong focus on frontend development and visual design, I seamlessly bridge aesthetics and performance to create thoughtful, memorable user journeys.
 </div>
 
-<!-- PRODUCTS -->
+<h2>Products</h2>
+
 <div class="products">
-  <h2>My Products</h2>
 
-  <div class="product-container">
-
-    <div class="card">
-      <img src="images/product1.webp">
-      <h3>Product 1</h3>
-      <p>Rs. 299</p>
-    </div>
-
-    <div class="card">
-      <img src="images/product2.webp">
-      <h3>Product 2</h3>
-      <p>Rs. 499</p>
-    </div>
-
+  <div class="card">
+    <img src="images/product1.webp">
+    <p>Product 1</p>
   </div>
+
+  <div class="card">
+    <img src="images/product2.webp">
+    <p>Product 2</p>
+  </div>
+
 </div>
 
-<!-- CONTACT -->
-<div class="contact">
-  <h2>Let's Connect</h2>
-
-  <form action="save.php" method="POST" class="form-box">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" required></textarea>
-
+<div class="form-box">
+  <form onsubmit="saveData(event)">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Your Email" required>
+    <textarea id="message" placeholder="Your Message" required></textarea>
     <button type="submit">Send</button>
   </form>
 </div>
+
+<button onclick="viewData()">View Messages</button>
+
+<div id="output"></div>
+
+<script>
+function saveData(event) {
+  event.preventDefault();
+
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let message = document.getElementById("message").value;
+
+  let data = JSON.parse(localStorage.getItem("messages")) || [];
+
+  data.push({name, email, message});
+
+  localStorage.setItem("messages", JSON.stringify(data));
+
+  alert("Saved!");
+  document.querySelector("form").reset();
+}
+
+function viewData() {
+  let data = JSON.parse(localStorage.getItem("messages")) || [];
+
+  let output = "";
+
+  data.forEach(item => {
+    output += 
+      <div class="message-box">
+        <h3>${item.name}</h3>
+        <p>${item.email}</p>
+        <p>${item.message}</p>
+      </div>
+    ;
+  });
+
+  document.getElementById("output").innerHTML = output;
+}
+</script>
 
 </body>
 </html>
