@@ -21,11 +21,9 @@
       max-width: 600px;
       margin: 20px auto;
       padding: 20px;
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.85);
       border-radius: 15px;
-      font-size: 16px;
       line-height: 1.6;
-      color: #444;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
 
@@ -43,14 +41,9 @@
       border-radius: 15px;
       width: 220px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      transition: 0.3s;
     }
 
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    img {
+    .card img {
       width: 100%;
       border-radius: 10px;
     }
@@ -116,8 +109,8 @@ With a strong focus on frontend development and visual design, I seamlessly brid
 </div>
 
 <div class="form-box">
-  <!-- ✅ IMPORTANT FIX (NO save.php) -->
-  <form onsubmit="saveData(event)">
+  <!-- FINAL FIXED FORM -->
+  <form onsubmit="saveData(event); return false;">
     <input type="text" id="name" placeholder="Your Name" required>
     <input type="email" id="email" placeholder="Your Email" required>
     <textarea id="message" placeholder="Your Message" required></textarea>
@@ -127,7 +120,6 @@ With a strong focus on frontend development and visual design, I seamlessly brid
 
 <button onclick="viewData()">View Messages</button>
 
-<!-- ✅ OUTPUT HERE -->
 <div id="output"></div>
 
 <script>
@@ -152,6 +144,13 @@ function saveData(event) {
 function viewData() {
   let data = JSON.parse(localStorage.getItem("messages")) || [];
 
+  let outputDiv = document.getElementById("output");
+
+  if (data.length === 0) {
+    outputDiv.innerHTML = "<p>No messages yet</p>";
+    return;
+  }
+
   let output = "";
 
   data.forEach(item => {
@@ -164,7 +163,7 @@ function viewData() {
     ;
   });
 
-  document.getElementById("output").innerHTML = output;
+  outputDiv.innerHTML = output;
 }
 </script>
 
